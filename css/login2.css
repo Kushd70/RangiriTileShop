@@ -1,0 +1,83 @@
+/* Base style for response messages */
+p.responseMessage {
+    font-size: 18px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    width: fit-content;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+/* Error message style */
+p.responseMessage_error {
+    background: linear-gradient(45deg, rgba(255, 0, 0, 0.1), rgba(128, 0, 0, 0.2));
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #880000;
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Success message style */
+p.responseMessage_success {
+    background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 128, 0, 0.2));
+    border: 1px solid rgba(0, 255, 0, 0.4);
+    color: #006600;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Shake animation for error messages */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+/* Fade-in animation for success messages */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Add hover effect for messages */
+p.responseMessage:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+/*user add page*/
+div.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;   
+}
+div.column{
+    width: 100%; 
+    /*padding: 0px 10px;*/ 
+}
+div.column-5{
+    width: 41.67%;
+
+}
+div.column-7{
+    width: 58.33%;
+}
+h1.section_header{
+    font-size: 21px;
+    color: #f685a1;
+    border-bottom: 11px;
+    padding-bottom: 11px;
+    padding: 10px;
+    border-left: 4px solid green;
+    margin-bottom: 10px;
+
+}
+
+.productTextAreaInput{
+    height: 51px;
+    width: 428px;
+}

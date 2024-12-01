@@ -1,0 +1,56 @@
+.dashboard_sidebar_menu ul{
+    list-style: none;
+}
+
+
+ul.dashboard_menu_lists{
+    margin-top: 20px;
+    font-size: 14px;
+}
+ul.dashboard_menu_lists li{
+    padding-top: 15px;
+    padding: 15px 15px;
+    text-transform: uppercase;
+}
+
+/* kushan--------------------- */
+.subMenus{
+    background-color: #b95a72;
+    text-transform: none;
+    padding-left: 0px;
+    margin-left: -10px;
+
+}
+
+ul.dashboard_menu_lists li a{
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    /* kushan ------------------------------------------------------------------------------- */
+    font-size:14px;
+    padding: 0px 15px;
+    /* kushan_______ --------------------------------------------------------------------------- */
+}
+
+ul.dashboard_menu_lists li i{
+    size: 10px;
+}
+
+ul.dashboard_menu_lists li.menuActive{
+    background: #f685a1;
+    color: #fff;
+}
+ul.dashboard_menu_lists li:hover{
+    background: #f685a1;
+    color: #fff;
+}
+
+a.subMenuLink{
+    text-transform: none;
+}
+
+.up{
+    margin-left: 10px;
+    float: right;
+}
+

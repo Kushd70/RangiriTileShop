@@ -18,6 +18,8 @@ if($_POST){
 
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $user = $stmt->fetchAll()[0];
+
+    // Captures data of currently login users
     $_SESSION['user'] = $user;
     
     header('Location: dashboard.php');

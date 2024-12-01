@@ -3,7 +3,7 @@
 session_start();
 if(!isset($_SESSION['user'])) header('location: login.php');
 $_SESSION['table'] = 'products';
-
+$_SESSION['redirect_to'] = 'productAdd.php';
 $user=$_SESSION['user'];
 
 

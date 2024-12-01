@@ -2,13 +2,8 @@
 //start the session
 session_start();
 if(!isset($_SESSION['user'])) header('location: login.php');
-$_SESSION['table'] = 'users';
-
-$user=$_SESSION['user'];
-$users = include('database/users-show.php');
-
-
-
+$_SESSION['table'] = 'products';
+$products = include('database/show.php');
 
 ?>
 
@@ -16,7 +11,7 @@ $users = include('database/users-show.php');
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DASHBOARD - Rangiri granite & Ceramic pvt(ltd)</title>
+        <title>View Products - Rangiri granite & Ceramic pvt(ltd)</title>
         <link rel="stylesheet" type="text/css" href="css/login.css?v=1.0">
         <link rel="stylesheet" type="text/css" href="css/login2.css?v=<?= time();?>">
         <link rel="stylesheet" type="text/css" href="css/usertable.css?v=1.0">
@@ -34,7 +29,7 @@ $users = include('database/users-show.php');
 
             
                     <div class="column column-7">
-                    <h1 class="section_header"><i class="bi bi-list"></i>List of Users</h1>
+                    <h1 class="section_header"><i class="bi bi-list"></i>List of Products</h1>
                     <div class="section_content">
                         <div class="users">
                             
@@ -42,9 +37,10 @@ $users = include('database/users-show.php');
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th>Description</th>
+                                        <th>Created By</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Action</th>
@@ -53,23 +49,35 @@ $users = include('database/users-show.php');
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach($users as $index => $user){?>
+                                    foreach($products as $index => $product){?>
                                      <tr>
                                         <td><?=$index + 1 ?></td>
-                                        <td class="firstName"><?=$user['first_name']?></td>
-                                        <td class="lastName"><?=$user['last_name']?></td>
-                                        <td class="email"><?=$user['email']?></td>
-                                        <td><?= date('M d, Y @ h:i:s:A',strtotime($user['created_at']))?></td>
-                                        <td><?= date('M d, Y @ h:i:s:A',strtotime($user['updated_at']))?></td>
+                                        <td class="firstName">
+
+                                            <!-- image huthoo hukanna--->
+                                            <img class="productImages" src ="uploads/products/<?= $product['img'] ?>" alt="" />
+                                        </td>
+                                        <td class="lastName"><?=$product['product_name']?></td>
+                                        <td class="email"><?=$product['description']?></td>
+
+                                        <?php
+                                            $stmt = $conn->prepare("SELECT * FROM users WHERE id= ORDER BY created_at DESC");
+                                            $stmt->execute();
+                                            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+                                        ?>
+                                        <td ><?=$product['created_by']?></td>
+                                        <td><?= date('M d, Y @ h:i:s:A',strtotime($product['created_at']))?></td>
+                                        <td><?= date('M d, Y @ h:i:s:A',strtotime($product['updated_at']))?></td>
                                         <td>
-                                            <a href="" class="updateUser" data-userid="<?=$user['id'] ?>"><i class="bi bi-pencil"></i> Edit</a>
-                                            <a href="" class="deleteUser"data-userid="<?=$user['id'] ?>" data-fname="<?=$user['first_name'] ?>" data-lname="<?=$user['last_name'] ?>" ><i class="bi bi-trash3"></i> Delete</a>
+                                            <a href="" class="updateUser" data-userid="<?=$product['id'] ?>" ><i class="bi bi-pencil"></i> Edit</a>
+                                            <a href="" class="deleteUser" data-userid="<?=$product['id'] ?>" ><i class="bi bi-trash3"></i> Delete</a>
                                         </td>
                                      </tr>
                                     <?php } ?>                                    
                                 </tbody>
                             </table>
-                            <p class="userCount"><?= count($users) ?> Users</p>
+                            <p class="userCount"><?= count($products) ?> products</p>
                         </div>
                     
                     </div>

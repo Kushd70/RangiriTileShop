@@ -2,10 +2,8 @@
 //start the session
 session_start();
 if(!isset($_SESSION['user'])) header('location: login.php');
-$_SESSION['table'] = 'users';
-
-$user=$_SESSION['user'];
-$users = include('database/users-show.php');
+$_SESSION['table'] = 'suppliers';
+$_SESSION['redirect_to'] = 'addSupplier.php'
 
 
 
@@ -41,15 +39,15 @@ $users = include('database/users-show.php');
                     <form action="database/users-add.php" method ="POST" class="appForm">
                         <div class ="appFormInputContainer">
                             <label for="supplier_name">Supplier Name</label>
-                            <input type="text"class="appFormInput" id="supplier_name" name="supplier_name"/>
+                            <input type="text"class="appFormInput" placeholder = "Enter supplier name" id="supplier_name" name="supplier_name"/>
                         </div>
                         <div class ="appFormInputContainer">
                             <label for="supplier_location">Location</label>
-                            <input type="text" class="appFormInput" id="supplier_location" name="supplier_location"/>
+                            <input type="text" class="appFormInput" placeholder = "Enter supplier location" id="supplier_location" name="supplier_location"/>
                         </div>
                         <div class ="appFormInputContainer">
                             <label for="email">Email</label>
-                            <input type="text" class="appFormInput" id="email" name="email"/>
+                            <input type="text" class="appFormInput" placeholder = "Enter the supplier email " id="email" name="email"/>
                         </div>
 
                         <button type ="submit" class="appBtn"><i class="bi bi-plus-circle"></i>Add Supplier</button>

@@ -27,9 +27,7 @@ $products = include('database/show.php');
 
         <?php include('partials/app-topnav.php')?>
 
-            <div class="dashboard_content">
-                <div class="dashboard_content_main">
-                <div class="row">
+            
                     <div class="column column-7">
                     <h1 class="section_header"><i class="bi bi-list"></i>List of Products</h1>
                     <div class="section_content">
@@ -110,6 +108,118 @@ $products = include('database/show.php');
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.35.4/js/bootstrap-dialog.js" integrity="sha512-AZ+KX5NScHcQKWBfRXlCtb+ckjKYLO1i10faHLPXtGacz34rhXU8KM4t77XXG/Oy9961AeLqB/5o0KTJfy2WiA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script>
+         function script(){
+
+            this.initialize = function(){
+                this.registerEvents();
+            },
+
+            this.registerEvents = function(){
+                document.addEventListener('click',function(e){
+                    targetElement = e.target;
+                    classList = e.target.classList;
+                    
+
+                    if(classList.contains('deleteUser') ){
+                        e.preventDefault();
+                        userId =targetElement.dataset.userid;
+                        fname = targetElement.dataset.fname;
+                        lname = targetElement.dataset.lname;
+                        fullName = fname + ' ' + lname;
+                         
+                        if(window.confirm('Are you sure to delete '+ fname + '?')){
+                            $.ajax({
+                                method: 'POST',
+                                data:{
+                                    user_id: userId,
+                                    f_name: fname,
+                                    l_name: lname
+                                },
+                                url:'database/delete-user.php',
+                                dataType:'Json',
+                                success: function(data){
+                                    if(data.success){
+                                        if(window.confirm(data.message)){
+                                            location.reload();
+                                        }
+                                    }else window.alert(data.message);
+                                    
+                                }
+                            })
+                        }
+                        else{
+                            console.log('will not delete');
+                        }
+                    
+
+                    }
+                    if(classList.contains('updateUser')){
+                        e.preventDefault(); //prevent from loading....
+                        
+                        //get data
+                        firstName=targetElement.closest('tr').querySelector('td.firstName').innerHTML;
+                        lastName =targetElement.closest('tr').querySelector('td.lastName').innerHTML;
+                        email    =targetElement.closest('tr').querySelector('td.email').innerHTML;
+                        userId =targetElement.dataset.userid;
+
+                       BootstrapDialog.confirm({
+                        title: 'Update'+ firstName +'' + lastName,
+                        message: '<form>\
+                                <div class="form-group">\
+                                   <label for="firstName"> First Name:</label>\
+                                   <input type="text" class="form-control" id="firstName" value= "'+ firstName +'">\
+                                </div>\
+                                 <div class="form-group">\
+                                   <label for="lastName"> Last Name:</label>\
+                                   <input type="text" class="form-control" id="lastName" value= "'+ lastName +'">\
+                                </div>\
+                                 <div class="form-group">\
+                                   <label for="email"> Email Address:</label>\
+                                   <input type="email" class="form-control" id="emailUpdate" value= "'+ email +'">\
+                                </div>\
+                                  </form>',
+                                  callback: function(isUpdate){
+
+                                    if(isUpdate){
+                                        $.ajax({
+                                method: 'POST',
+                                data:{
+                                    userId:userId,
+                                    f_name: document.getElementById('firstName').value,
+                                    l_name: document.getElementById('lastName').value,
+                                    email: document.getElementById('emailUpdate').value,
+                                },
+                                url:'database/update-user.php',
+                                dataType:'Json',
+                                success: function(data){
+                                    if(data.success){
+                                        if(window.confirm(data.message)){
+                                            location.reload();
+                                        }
+                                    }else window.alert(data.message);
+                                    
+                                }
+                            })
+                                    }else{
+
+                                    }
+                                  }
+
+
+
+                       });
+                    }
+                    
+
+                });
+
+            }
+
+
+        }
+        var script = new script;
+        script.initialize();
 
     </script>
     

@@ -12,11 +12,10 @@ $users = include('database/users-show.php');
 
 ?>
 
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DASHBOARD - Rangiri granite & Ceramic pvt(ltd)</title>
+        <title>Add Supplier - Rangiri granite & Ceramic pvt(ltd)</title>
         <link rel="stylesheet" type="text/css" href="css/login.css?v=1.0">
         <link rel="stylesheet" type="text/css" href="css/login2.css?v=<?= time();?>">
         <link rel="stylesheet" type="text/css" href="css/usertable.css?v=1.0">
@@ -35,29 +34,25 @@ $users = include('database/users-show.php');
                 <div class="dashboard_content_main">
                 <div class="row">
                     <div class="column column-5">
-                        <h1 class="section_header"><i class="bi bi-plus-lg"></i>Create User</h1>
+                        <h1 class="section_header"><i class="bi bi-plus-lg"></i>Create Supplier</h1>
 
                     <div id ="userAddFormContainer">
 
                     <form action="database/users-add.php" method ="POST" class="appForm">
                         <div class ="appFormInputContainer">
-                            <label for="first_name">First Name</label>
-                            <input type="text"class="appFormInput" id="first_name" name="first_name"/>
+                            <label for="supplier_name">Supplier Name</label>
+                            <input type="text"class="appFormInput" id="supplier_name" name="supplier_name"/>
                         </div>
                         <div class ="appFormInputContainer">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="appFormInput" id="last_name" name="last_name"/>
+                            <label for="supplier_location">Location</label>
+                            <input type="text" class="appFormInput" id="supplier_location" name="supplier_location"/>
                         </div>
                         <div class ="appFormInputContainer">
                             <label for="email">Email</label>
                             <input type="text" class="appFormInput" id="email" name="email"/>
                         </div>
-                        <div class ="appFormInputContainer">
-                            <label for="password">Password</label>
-                            <input type="password" class="appFormInput" id="password" name="password"/>
-                        </div>
-                        
-                        <button type ="submit" class="appBtn"><i class="bi bi-plus-circle"></i>Add User</button>
+
+                        <button type ="submit" class="appBtn"><i class="bi bi-plus-circle"></i>Add Supplier</button>
                         
                     </form>
                     <?php 

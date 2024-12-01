@@ -1,3 +1,11 @@
+<?php
+
+     $user = $_SESSION['user'];
+
+?>
+
+
+
 <!-- kushan -------------------------------------------------------->
 <link rel = "stylesheet" href= "css/sidebar.css">
 <script src="js/scriptsideBar.js"></script>

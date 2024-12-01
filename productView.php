@@ -32,9 +32,7 @@ $users = include('database/users-show.php');
 
         <?php include('partials/app-topnav.php')?>
 
-            <div class="dashboard_content">
-                <div class="dashboard_content_main">
-                <div class="row">
+            
                     <div class="column column-7">
                     <h1 class="section_header"><i class="bi bi-list"></i>List of Users</h1>
                     <div class="section_content">
@@ -64,8 +62,8 @@ $users = include('database/users-show.php');
                                         <td><?= date('M d, Y @ h:i:s:A',strtotime($user['created_at']))?></td>
                                         <td><?= date('M d, Y @ h:i:s:A',strtotime($user['updated_at']))?></td>
                                         <td>
-                                            <a href="" class="updateUser" ><i class="bi bi-pencil"></i> Edit</a>
-                                            <a href="" class="deleteUser" data-userid="<?=$user['id'] ?>" data-fname="<?=$user['first_name'] ?>" data-lname="<?=$user['last_name'] ?>" ><i class="bi bi-trash3"></i> Delete</a>
+                                            <a href="" class="updateUser" data-userid="<?=$user['id'] ?>"><i class="bi bi-pencil"></i> Edit</a>
+                                            <a href="" class="deleteUser"data-userid="<?=$user['id'] ?>" data-fname="<?=$user['first_name'] ?>" data-lname="<?=$user['last_name'] ?>" ><i class="bi bi-trash3"></i> Delete</a>
                                         </td>
                                      </tr>
                                     <?php } ?>                                    
@@ -155,10 +153,51 @@ $users = include('database/users-show.php');
                         firstName=targetElement.closest('tr').querySelector('td.firstName').innerHTML;
                         lastName =targetElement.closest('tr').querySelector('td.lastName').innerHTML;
                         email    =targetElement.closest('tr').querySelector('td.email').innerHTML;
+                        userId =targetElement.dataset.userid;
 
                        BootstrapDialog.confirm({
-                        title: 'Update '+ firstName +' ' + lastName,
-                        message: firstName +' '+ lastName +' '+ email
+                        title: 'Update'+ firstName +'' + lastName,
+                        message: '<form>\
+                                <div class="form-group">\
+                                   <label for="firstName"> First Name:</label>\
+                                   <input type="text" class="form-control" id="firstName" value= "'+ firstName +'">\
+                                </div>\
+                                 <div class="form-group">\
+                                   <label for="lastName"> Last Name:</label>\
+                                   <input type="text" class="form-control" id="lastName" value= "'+ lastName +'">\
+                                </div>\
+                                 <div class="form-group">\
+                                   <label for="email"> Email Address:</label>\
+                                   <input type="email" class="form-control" id="emailUpdate" value= "'+ email +'">\
+                                </div>\
+                                  </form>',
+                                  callback: function(isUpdate){
+
+                                    if(isUpdate){
+                                        $.ajax({
+                                method: 'POST',
+                                data:{
+                                    userId:userId,
+                                    f_name: document.getElementById('firstName').value,
+                                    l_name: document.getElementById('lastName').value,
+                                    email: document.getElementById('emailUpdate').value,
+                                },
+                                url:'database/update-user.php',
+                                dataType:'Json',
+                                success: function(data){
+                                    if(data.success){
+                                        if(window.confirm(data.message)){
+                                            location.reload();
+                                        }
+                                    }else window.alert(data.message);
+                                    
+                                }
+                            })
+                                    }else{
+
+                                    }
+                                  }
+
 
 
                        });

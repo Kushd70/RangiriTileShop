@@ -1,7 +1,17 @@
 <?php
 session_start();
+// Capture the table mapping
+include('table_column.php');
 
+var_dump($table_column_mapping);
+
+//capture the table name 
 $table_name = $_SESSION['table'];
+$columns=$table_columns_mapping
+
+
+
+//For users data
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];

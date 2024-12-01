@@ -37,7 +37,7 @@ $user=$_SESSION['user'];
 
                     <div id ="userAddFormContainer">
 
-                    <form action="database/products-add.php" method ="POST" class="appForm">
+                    <form action="database/users-add.php" method ="POST" class="appForm">
                         <div class ="appFormInputContainer">
                             <label for="product_name">Product Name</label>
                             <input type="text"class="appFormInput" id="product_name" placeholder = "Enter product name..." name="product_name"/>

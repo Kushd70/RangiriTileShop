@@ -7,6 +7,7 @@ var_dump($table_column_mapping);
 
 //capture the table name 
 $table_name = $_SESSION['table'];
+
 $columns=$table_columns_mapping
 
 

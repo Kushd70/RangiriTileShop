@@ -60,18 +60,26 @@ $products = include('database/show.php');
                                         <td class="lastName"><?=$product['product_name']?></td>
                                         <td class="email"><?=$product['description']?></td>
 
+                                        <!---janith gahuve--->
+                                    <td>
                                         <?php
-                                            $stmt = $conn->prepare("SELECT * FROM users WHERE id= ORDER BY created_at DESC");
+                                            $pid = $product['created_by'];
+                                            $stmt = $conn->prepare("SELECT * FROM users WHERE id=$pid ");
                                             $stmt->execute();
-                                            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
+                                            $row    =$stmt->fetch(PDO::FETCH_ASSOC);
+                                            $created_by_name = $row['first_name'] . ''. $row['last_name'];
+                                            echo $created_by_name;
+                                            
                                         ?>
-                                        <td ><?=$product['created_by']?></td>
+
+                                    </td>
+
                                         <td><?= date('M d, Y @ h:i:s:A',strtotime($product['created_at']))?></td>
-                                        <td><?= date('M d, Y @ h:i:s:A',strtotime($product['updated_at']))?></td>
+                                        <td><?= date('M d, Y @ h:i:s:A',strtotime($product['update_at']))?></td>
                                         <td>
-                                            <a href="" class="updateUser" data-userid="<?=$product['id'] ?>" ><i class="bi bi-pencil"></i> Edit</a>
-                                            <a href="" class="deleteUser" data-userid="<?=$product['id'] ?>" ><i class="bi bi-trash3"></i> Delete</a>
+                                            <!---janith ghuve---->
+                                            <a href="" class="updateUser" data-pid="<?=$product['id'] ?>"><i class="bi bi-pencil"></i> Edit</a>
+                                            <a href="" class="deleteUser" data-name="<?=$product['id'] ?>" ><i class="bi bi-trash3"></i> Delete</a>
                                         </td>
                                      </tr>
                                     <?php } ?>                                    

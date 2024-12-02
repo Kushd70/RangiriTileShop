@@ -16,7 +16,7 @@
     $user = $_SESSION['user'];
 
     foreach($columns as $column){
-        if(in_array($column, ['created_at', 'updated_at'])) $value = date('Y-m-d H:i:s');
+        if(in_array($column, ['created_at', 'update_at'])) $value = date('Y-m-d H:i:s');
         else if ($column == 'created_by') $value = $user['id'];
         else $value = isset($_POST[$column]) ? $_POST[$column] : '';
 
